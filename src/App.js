@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './app.css'
+import { ThemeProvider } from './components/ThemeContext';
+import Toggle from './components/ThemeToggle';
+import NavBar from './components/NavBar';
 
 function App() {
 
@@ -17,10 +20,14 @@ function App() {
 
 
   return (
-    <h1 className="text-3xl text-red-500 font-bold underline">
-      Recipes
-      {recipes ? recipes[0].name : "Hello World"}
-    </h1>
+    <ThemeProvider>
+      <NavBar/>
+    <h1 className="text-3xl text-red-500 font-bold underline dark:bg-black">
+      Recipes    
+      </h1>
+      <Toggle />    
+
+    </ThemeProvider>
   )
 }
 
