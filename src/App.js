@@ -22,7 +22,7 @@ function App() {
   return (
     <ThemeProvider>
       <NavBar/>
-    <h1 className="text-3xl text-red-500 font-bold underline dark:bg-black">
+      <h1 className="text-3xl text-red-500 font-bold underline dark:bg-black">
       Recipes    
       </h1>
       <Toggle />    
