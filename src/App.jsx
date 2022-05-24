@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './app.css'
 import NavBar from './components/NavBar';
-import ToggleTheme from './components/ToggleTheme';
 import RecipeCard from './components/RecipeCard';
+import RecipeList from './components/RecipeList';
 
 export const ThemeContext = React.createContext()
 
@@ -16,10 +16,17 @@ function App() {
     setDark
   }
 
-
   useEffect(() => {
     localStorage.setItem('theme', dark)
+    console.log(dark)
+    if (dark === 'light') {
+      console.log('light')
+      document.documentElement.classList.remove('dark')
+    } else {
+      document.documentElement.classList.add(dark)
+    }
   }, [dark])
+
 
 
   const [recipes, setRecipes] = useState([]);
@@ -37,10 +44,10 @@ function App() {
   return (
     <ThemeContext.Provider value={themeContextValue}>
       <NavBar />
-      <h1 className="text-3xl  font-bold underline dark:bg-gray-800 dark:text-gray-100">
+      <h1 className="text-3xl  font-bold underline">
       Recipes    
       </h1>
-      <RecipeCard/>
+      <RecipeList recipes={recipes}/>
     </ThemeContext.Provider>
   )
 }
