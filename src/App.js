@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import './app.css'
-import { ThemeProvider } from './components/ThemeContext';
-import Toggle from './components/ThemeToggle';
 import NavBar from './components/NavBar';
+import ToggleTheme from './components/ToggleTheme';
+import RecipeCard from './components/RecipeCard';
+
+export const ThemeContext = React.createContext()
 
 function App() {
+
+  const [dark, setDark] = useState('light')
+
+  const themeContextValue = {
+    dark,
+    setDark
+  }
+
+
+  useEffect(() => {
+    localStorage.setItem('theme', dark)
+  }, [dark])
+
 
   const [recipes, setRecipes] = useState([]);
 
@@ -20,12 +35,13 @@ function App() {
 
 
   return (
-    <ThemeProvider>
-      <NavBar/>
-      <h1 className="text-3xl text-red-500 font-bold underline dark:bg-gray-800">
+    <ThemeContext.Provider value={themeContextValue}>
+      <NavBar />
+      <h1 className="text-3xl  font-bold underline dark:bg-gray-800 dark:text-gray-100">
       Recipes    
       </h1>
-    </ThemeProvider>
+      <RecipeCard/>
+    </ThemeContext.Provider>
   )
 }
 
