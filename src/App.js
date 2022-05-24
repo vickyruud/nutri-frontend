@@ -25,8 +25,6 @@ function App() {
       <h1 className="text-3xl text-red-500 font-bold underline dark:bg-gray-800">
       Recipes    
       </h1>
-      <Toggle />    
-
     </ThemeProvider>
   )
 }
