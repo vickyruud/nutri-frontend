@@ -39,7 +39,6 @@ function App() {
     axios.get('/recipes')
       .then((res) => {
         setRecipes(res.data);
-        console.log(res.data[0].name)
     })
   }, [])
 
