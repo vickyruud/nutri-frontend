@@ -1,17 +1,16 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { HiMoon, HiSun } from "react-icons/hi";
 import { ThemeContext } from "../App";
   
 const ToggleTheme = () => {
 
-  const { dark, setDark } = useContext(ThemeContext);
+  const { setDark } = useContext(ThemeContext);
 
   const changeTheme = () => {
     if (localStorage.getItem('theme') === 'light') {
       setDark('dark')
     } else {
-      setDark('light');
-      
+      setDark('light');      
     }
   }
   
