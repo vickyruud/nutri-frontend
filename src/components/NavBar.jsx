@@ -5,6 +5,8 @@ import ToggleTheme from "./ToggleTheme";
 function NavBar({ setShowModal, user, logout }) {
   const showNav = false;
 
+  
+
   return (
     <nav className="md:flex justify-between items-center bg-gray-300 border-b-4 border-black dark:border-gray-400 dark:bg-cyan-900">
       <div className="flex items-center justify-between  ">
@@ -25,7 +27,7 @@ function NavBar({ setShowModal, user, logout }) {
         }
       >
                 
-        {user ? <NavItem content="My Recipes" /> : <NavItem content="Sign Up" />}
+        {user ? <NavItem content="My Recipes" onClick={() => window.location.href='/my-recipes'} /> : <NavItem content="Sign Up" />}
         {user ? <NavItem content="Logout" onClick={logout} /> :  <NavItem content="Login" onClick={() => setShowModal(true)} />}
         <ToggleTheme />
       </ul>
