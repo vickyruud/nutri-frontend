@@ -5,8 +5,8 @@ function NavItem({ content, onClick }) {
   
 
   return (
-    <li className={'text-lg font-semibold dark:text-gray-300'}>
-      <p onClick={onClick}>{content}</p>
+    <li>
+      <button className='text-lg font-semibold dark:text-gray-300' onClick={onClick}>{content}</button>
     </li>
   )
 }

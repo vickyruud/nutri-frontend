@@ -3,12 +3,16 @@ import axios from 'axios'
 import './app.css'
 import NavBar from './components/NavBar';
 import RecipeList from './components/RecipeList';
+import Modal from './components/Modal';
 
 export const ThemeContext = React.createContext()
 
 function App() {
 
-  const [dark, setDark] = useState(localStorage.getItem('theme') || 'light')
+  const [dark, setDark] = useState(localStorage.getItem('theme') || 'light');
+  const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState(null);
+
 
   const themeContextValue = {
     dark,
@@ -26,12 +30,10 @@ function App() {
   }, [dark])
 
   //maintains theme on refresh
-   useEffect(() => {
+  useEffect(() => {
     const theme = localStorage.getItem('theme')
     if (theme != null) setDark(theme)
-  }, [])
-
-
+  }, []);
 
   const [recipes, setRecipes] = useState([]);
 
@@ -46,8 +48,11 @@ function App() {
 
   return (
     <ThemeContext.Provider value={themeContextValue}>
-      <NavBar />     
-      <RecipeList recipes={recipes}/>
+      <NavBar setShowModal={setShowModal} />
+      <div className='flex flex-col items-center'>    
+        <Modal showModal={showModal} setShowModal={setShowModal}/>
+        <RecipeList recipes={recipes}/>
+      </div>
     </ThemeContext.Provider>
   )
 }
