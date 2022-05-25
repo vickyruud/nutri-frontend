@@ -4,8 +4,9 @@ import './app.css'
 import NavBar from './components/NavBar';
 import RecipeList from './components/RecipeList';
 import Modal from './components/Modal';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MyRecipes from './components/MyRecipes';
+import Home from './components/Home';
 
 
 
@@ -114,14 +115,14 @@ function App() {
     
     <ThemeContext.Provider value={themeContextValue}>
       <NavBar register={register} setShowModal={setShowModal} user={user} logout={logout} setModalType={setModalType} />
-      <div className='flex flex-col items-center'>
+      <div className='flex flex-col items-center backdrop-blur-sm'>
         <Modal register={register} modalType={modalType} showModal={showModal} setShowModal={setShowModal} login={login} />
         <Routes>
-          <Route path='/' element={<RecipeList recipes={recipes} />} />
+          <Route path='/' element={<Home/>} />
+          <Route path='/recipes' element={<RecipeList recipes={recipes} />} />
           <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />
         </Routes>
       </div>
-        <Outlet />
       </ThemeContext.Provider>
       
   )

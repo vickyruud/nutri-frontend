@@ -3,8 +3,17 @@
 @tailwind utilities;
 
 .dark{
-  background-color: rgb(4, 28, 50);
+  background-color: rgb(5, 50, 14);
   color: rgb(229 231 235);
 }
 
-
+body {
+  height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('../public/background.jpg') no-repeat center/cover ;
+  
+}
+body .overlay {
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+  
+}

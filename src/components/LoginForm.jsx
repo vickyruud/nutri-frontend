@@ -27,7 +27,7 @@ function LoginForm({ setShowModal, login }) {
         <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="w-20 h-20 text-blue-500"
+            className="w-20 h-20 text-green-500"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -66,10 +66,10 @@ function LoginForm({ setShowModal, login }) {
               />
             </div>
             <div className="flex items-baseline justify-between">
-              <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 dark:bg-sky-700 dark:hover:bg-sky-600">
+              <button className="mt-2 bg-green-500 p-2 px-4 rounded-full font-semibold transition-all hover:bg-green-800">
                 Login
               </button>
-              <button onClick={closeModal} className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 dark:bg-sky-700 dark:hover:bg-sky-600">
+              <button onClick={closeModal} className="mt-2 bg-green-500 p-2 px-4 rounded-full font-semibold transition-all hover:bg-green-800">
                 Cancel
               </button>
             </div>
