@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 
-function UserForm({ setShowModal }) {
+function UserForm({ setShowModal, login }) {
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    
+    const user = {
+      username: username,
+      password: password
+    }
+    login(user);
+  }
+
 
   const closeModal = (event) => {
     event.preventDefault();
@@ -29,16 +43,17 @@ function UserForm({ setShowModal }) {
           </svg>
         </div>
         <h3 className="text-2xl font-bold text-center">Login to your account</h3>
-        <form action="">
+        <form onSubmit={onSubmit}>
           <div className="mt-4">
             <div>
               <label className="block" htmlFor="email">
-                Email
+                Username
               </label>
               <input
                 type="text"
-                placeholder="Email"
-                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                placeholder="Username"
+                onChange={(event) => setUsername(event.target.value)}
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 dark:text-gray-900"
               />              
             </div>
             <div className="mt-4">
@@ -46,7 +61,8 @@ function UserForm({ setShowModal }) {
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                onChange={(event) => setPassword(event.target.value)}
+                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 dark:text-gray-900"
               />
             </div>
             <div className="flex items-baseline justify-between">

@@ -5,6 +5,8 @@ import NavBar from './components/NavBar';
 import RecipeList from './components/RecipeList';
 import Modal from './components/Modal';
 
+
+
 export const ThemeContext = React.createContext()
 
 function App() {
@@ -44,13 +46,51 @@ function App() {
     })
   }, [])
 
+  const login = (user) => {
 
+    const data = user
+    axios.post('/login', 
+      data
+    ).then((res) => {
+      console.log(res);
+      console.log(res.data.user)
+      setUser(res.data.user)
+      localStorage.setItem("token", res.data.token)
+      setShowModal(false);
+    })
+      .catch(err => {
+        console.log(err);
+    })
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    setUser('')
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      console.log('here')
+      axios.get('/authorize',
+        {
+        Authorization: `Bearer ${token}`
+      })
+        .then((res) => {
+          console.log(res);
+          setUser(res.data.user);
+        })
+      .catch((error) => console.log(error))
+    } else {
+      setUser('');
+    }
+  },[])
 
   return (
     <ThemeContext.Provider value={themeContextValue}>
-      <NavBar setShowModal={setShowModal} />
+      <NavBar setShowModal={setShowModal} user={user} logout={logout} />
       <div className='flex flex-col items-center'>    
-        <Modal showModal={showModal} setShowModal={setShowModal}/>
+        <Modal showModal={showModal} setShowModal={setShowModal} login={login}/>
         <RecipeList recipes={recipes}/>
       </div>
     </ThemeContext.Provider>
