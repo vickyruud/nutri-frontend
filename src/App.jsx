@@ -70,20 +70,26 @@ function App() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token !== null) {
+    if (!user) {
+      console.log('nope')
+
+      const token = localStorage.getItem('token');
+      if (token !== null) {
       axios.get('/authorize',
-        {
+      {
           headers: {
             "Authorization": `Bearer ${token}`            
           }
-      })
+        })
         .then((res) => {
           setUser(res.data);
         })
-      .catch((error) => console.log(error))
+        .catch((error) => console.log(error))
+      } else {
+        setUser('');
+      }
     } else {
-      setUser('');
+      console.log('works')       
     }
   },[])
 
@@ -97,8 +103,8 @@ function App() {
           <Route path='/' element={<RecipeList recipes={recipes} />} />
           <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />
         </Routes>
-        <Outlet />
       </div>
+        <Outlet />
       </ThemeContext.Provider>
       
   )
