@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function UserForm({ setShowModal, login }) {
+function LoginForm({ setShowModal, login }) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -46,7 +46,7 @@ function UserForm({ setShowModal, login }) {
         <form onSubmit={onSubmit}>
           <div className="mt-4">
             <div>
-              <label className="block" htmlFor="email">
+              <label className="block" htmlFor="username">
                 Username
               </label>
               <input
@@ -80,4 +80,4 @@ function UserForm({ setShowModal, login }) {
   );
 }
 
-export default UserForm;
+export default LoginForm;

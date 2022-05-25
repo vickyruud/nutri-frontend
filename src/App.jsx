@@ -11,11 +11,15 @@ import MyRecipes from './components/MyRecipes';
 
 export const ThemeContext = React.createContext()
 
-function App() {
 
+
+function App() {
+  
+  const [recipes, setRecipes] = useState([]);
   const [dark, setDark] = useState(localStorage.getItem('theme') || 'light');
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
+  const [modalType, setModalType] = useState('')
 
 
   const themeContextValue = {
@@ -39,8 +43,7 @@ function App() {
     if (theme != null) setDark(theme)
   }, []);
 
-  const [recipes, setRecipes] = useState([]);
-
+  //fetches all recipes
   useEffect(() => {
     axios.get('/recipes')
       .then((res) => {
@@ -48,15 +51,15 @@ function App() {
     })
   }, [])
 
-  const login = (user) => {
+  //allows the user to login
+  const login = (data) => {
 
-    const data = user
     axios.post('/login', 
       data
     ).then((res) => {
-      console.log(res.data.jwt)
       setUser(res.data.user)
       localStorage.setItem("token", res.data.jwt)
+      localStorage.setItem("user", JSON.stringify(res.data.user))
       setShowModal(false);
     })
       .catch(err => {
@@ -64,15 +67,31 @@ function App() {
     })
   }
 
+  //allows a new user to register
+  const register = (data) => {
+    axios.post('/users', 
+      data
+    ).then((res) => {
+      setUser(res.data.user)
+      localStorage.setItem("token", res.data.jwt)
+      localStorage.setItem("user", JSON.stringify(res.data.user))
+      setShowModal(false);
+    })
+      .catch(err => {
+        console.log(err);
+    })
+  }
+
+
+
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setUser('')
   }
 
   useEffect(() => {
     if (!user) {
-      console.log('nope')
-
       const token = localStorage.getItem('token');
       if (token !== null) {
       axios.get('/authorize',
@@ -88,17 +107,15 @@ function App() {
       } else {
         setUser('');
       }
-    } else {
-      console.log('works')       
     }
-  },[])
+  },[user])
 
   return (
     
     <ThemeContext.Provider value={themeContextValue}>
-      <NavBar setShowModal={setShowModal} user={user} logout={logout} />
+      <NavBar register={register} setShowModal={setShowModal} user={user} logout={logout} setModalType={setModalType} />
       <div className='flex flex-col items-center'>
-        <Modal showModal={showModal} setShowModal={setShowModal} login={login} />
+        <Modal register={register} modalType={modalType} showModal={showModal} setShowModal={setShowModal} login={login} />
         <Routes>
           <Route path='/' element={<RecipeList recipes={recipes} />} />
           <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />

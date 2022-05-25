@@ -2,8 +2,18 @@ import React from "react";
 import NavItem from "./NavItem";
 import ToggleTheme from "./ToggleTheme";
 
-function NavBar({ setShowModal, user, logout }) {
+function NavBar({ setShowModal, user, logout, setModalType }) {
   const showNav = false;
+
+  const showLogin = () => {
+    setModalType('login');
+    setShowModal(true);
+  }
+
+  const showSignUp = () => {
+    setModalType('sign-up');
+    setShowModal(true);
+  }
 
   
 
@@ -27,8 +37,8 @@ function NavBar({ setShowModal, user, logout }) {
         }
       >
                 
-        {user ? <NavItem content="My Recipes" onClick={() => window.location.href='/my-recipes'} /> : <NavItem content="Sign Up" />}
-        {user ? <NavItem content="Logout" onClick={logout} /> :  <NavItem content="Login" onClick={() => setShowModal(true)} />}
+        {user ? <NavItem content="My Recipes" onClick={() => window.location.href='/my-recipes'} /> : <NavItem content="Sign Up" onClick={showSignUp} />}
+        {user ? <NavItem content="Logout" onClick={logout} /> :  <NavItem content="Login" onClick={showLogin} />}
         <ToggleTheme />
       </ul>
     </nav>
