@@ -52,10 +52,9 @@ function App() {
     axios.post('/login', 
       data
     ).then((res) => {
-      console.log(res);
-      console.log(res.data.user)
+      console.log(res.data.jwt)
       setUser(res.data.user)
-      localStorage.setItem("token", res.data.token)
+      localStorage.setItem("token", res.data.jwt)
       setShowModal(false);
     })
       .catch(err => {
@@ -71,14 +70,14 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (token !== null) {
-      console.log('here')
       axios.get('/authorize',
         {
-        Authorization: `Bearer ${token}`
+          headers: {
+            "Authorization": `Bearer ${token}`            
+          }
       })
         .then((res) => {
-          console.log(res);
-          setUser(res.data.user);
+          setUser(res.data);
         })
       .catch((error) => console.log(error))
     } else {

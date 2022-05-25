@@ -24,10 +24,9 @@ function NavBar({ setShowModal, user, logout }) {
           " md:static fixed  bottom-0 top-12 md:flex md:space-x-7 items-center md:bg-transparent md:text-gray-500 bg-gray-900 bg-opacity-90 md:w-auto w-10/12 text-gray-300 md:space-y-0 space-y-5 p-2 transition-left"
         }
       >
-        <NavItem content="My Recipes" />
-        <NavItem content="Sign Up" />
-        <NavItem content="Login" onClick={() => setShowModal(true)} />
-        <NavItem content="Logout" onClick={logout} />
+                
+        {user ? <NavItem content="My Recipes" /> : <NavItem content="Sign Up" />}
+        {user ? <NavItem content="Logout" onClick={logout} /> :  <NavItem content="Login" onClick={() => setShowModal(true)} />}
         <ToggleTheme />
       </ul>
     </nav>
