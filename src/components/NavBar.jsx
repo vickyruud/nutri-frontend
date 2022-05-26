@@ -18,15 +18,15 @@ function NavBar({ setShowModal, user, logout, setModalType }) {
   
 
   return (
-    <nav className="md:flex justify-between items-center bg-gray-300 border-b-4 border-black dark:border-gray-400 dark:bg-teal-900">
+    <nav className="md:flex justify-between items-center bg-none border-b-2 border-black dark:border-gray-800 ">
       <div className="flex items-center justify-between  ">
         <a href="/">
           <img className="w-12 h-12 p-2" src="../logo.png" alt="logo" />
         </a>
-        <p className="text-xl font-bold">
-          Nutri Yums - Know what you are eating!
+        <p className="text-xl font-bold text-white">
+          Nutri Yums - Know what's in your recipe!
         </p>
-        <p className="ml-4 text-xl font-bold capitalize">
+        <p className="ml-4 text-xl font-bold capitalize text-white">
           {user ? `Welcome ${user.username}`  : null}
         </p>
       </div>

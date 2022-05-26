@@ -7,6 +7,7 @@ import Modal from './components/Modal';
 import { Route, Routes } from 'react-router-dom';
 import MyRecipes from './components/MyRecipes';
 import Home from './components/Home';
+import ViewRecipe from './components/ViewRecipe';
 
 
 
@@ -120,6 +121,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/recipes' element={<RecipeList recipes={recipes} />} />
+          <Route path='/recipes/:id' element={<ViewRecipe/>}/>  
           <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />
         </Routes>
       </div>
