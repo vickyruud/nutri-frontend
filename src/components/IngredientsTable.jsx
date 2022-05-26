@@ -1,6 +1,22 @@
-import React from 'react'
+/* eslint no-eval: 0 */
 
-function IngredientsTable({ingredients}) {
+import React from 'react';
+
+function IngredientsTable({ ingredients }) {
+
+
+  const jsonIngredients = eval(ingredients);
+
+  const arrayOfRows = jsonIngredients.map((ingredient, i ) => {
+    return (
+      <tr key={i} className="border-2 border-gray-800 ">
+        <td>{ingredient.name}</td>
+        <td>{ingredient.quantity}</td>
+        <td>{ingredient.unit} </td>
+      </tr>
+    )
+  })
+
   return (
     <table className="table-auto text-white">
   <thead>
@@ -11,21 +27,7 @@ function IngredientsTable({ingredients}) {
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-      <td>Malcolm Lockyer</td>
-      <td>1961</td>
-    </tr>
-    <tr>
-      <td>Witchy Woman</td>
-      <td>The Eagles</td>
-      <td>1972</td>
-    </tr>
-    <tr>
-      <td>Shining Star</td>
-      <td>Earth, Wind, and Fire</td>
-      <td>1975</td>
-    </tr>
+    {arrayOfRows}
   </tbody>
 </table>
   )

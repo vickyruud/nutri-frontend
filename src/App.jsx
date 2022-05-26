@@ -47,7 +47,11 @@ function App() {
 
   //fetches all recipes
   useEffect(() => {
-    axios.get('/recipes')
+    axios.get('/recipes', {
+      headers: {
+        "Content-type": "application/json"
+      }
+    })
       .then((res) => {
         setRecipes(res.data);
         localStorage.setItem('recipes', JSON.stringify(res.data));
