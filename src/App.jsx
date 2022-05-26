@@ -50,6 +50,7 @@ function App() {
     axios.get('/recipes')
       .then((res) => {
         setRecipes(res.data);
+        localStorage.setItem('recipes', JSON.stringify(res.data));
     })
   }, [])
 
@@ -121,7 +122,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/recipes' element={<RecipeList recipes={recipes} />} />
-          <Route path='/recipes/:id' element={<ViewRecipe/>}/>  
+          <Route path='/recipes/:id' element={<ViewRecipe recipes={recipes}/>}/>  
           <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />
         </Routes>
       </div>

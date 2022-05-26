@@ -10,7 +10,7 @@ function RecipeList({ recipes }) {
 
   return (
     <>
-      <div className="grid grid-cols-3 gap-4 m-4">{arrayOfRecipes}</div>
+      <div className="grid grid-cols-3 gap-4 m-4">{arrayOfRecipes}</div>      
     </>
   );
 }

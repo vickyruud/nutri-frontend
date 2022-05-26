@@ -18,7 +18,7 @@ function NavBar({ setShowModal, user, logout, setModalType }) {
   
 
   return (
-    <nav className="md:flex justify-between items-center bg-none border-b-2 border-black dark:border-gray-800 ">
+    <nav className="md:flex justify-between items-center bg-none">
       <div className="flex items-center justify-between  ">
         <a href="/">
           <img className="w-12 h-12 p-2" src="../logo.png" alt="logo" />
