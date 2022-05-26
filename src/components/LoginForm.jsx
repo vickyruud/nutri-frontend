@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../App";
+import Alert from "./Alert";
 
 function LoginForm({ setShowModal, login }) {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { error, setError } = useContext(ThemeContext);
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -22,8 +26,8 @@ function LoginForm({ setShowModal, login }) {
   }
 
   return (
-    <div className="flex items-center justify-center bg-gray-200 dark:bg-sky-900 ">
-      <div className="px-8 py-6  text-left bg-gray-200 shadow-2xl dark:bg-sky-900">
+    <div className="flex items-center justify-center bg-gray-200 dark:bg-teal-700 ">
+      <div className="px-8 py-6  text-left bg-gray-200 shadow-2xl dark:bg-teal-700">
         <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +69,7 @@ function LoginForm({ setShowModal, login }) {
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 dark:text-gray-900"
               />
             </div>
+            {error ? <p><Alert/></p> : null}
             <div className="flex items-baseline justify-between">
               <button className="mt-2 bg-green-500 p-2 px-4 rounded-full font-semibold transition-all hover:bg-green-800">
                 Login

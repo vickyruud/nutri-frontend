@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { ThemeContext } from "../App";
+import Alert from "./Alert";
 
 function SignUp({ setShowModal, register  }) {
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { error, setError } = useContext(ThemeContext);
+
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -24,8 +28,8 @@ function SignUp({ setShowModal, register  }) {
   }
 
   return (
-    <div className="flex items-center justify-center bg-gray-200 dark:bg-sky-900 ">
-      <div className="px-8 py-6  text-left bg-gray-200 shadow-2xl dark:bg-sky-900">
+    <div className="flex items-center justify-center bg-gray-200 dark:bg-teal-800">
+      <div className="px-8 py-6 text-left bg-gray-200 shadow-2xl dark:bg-teal-900">
         <div className="flex justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -75,6 +79,7 @@ function SignUp({ setShowModal, register  }) {
                 onChange={(event) => setPassword(event.target.value)}
                 className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-gray-900 dark:text-gray-900"
               />
+            {error ? <Alert/> : null}
             </div>
             <div className="flex items-baseline justify-between">
               <button className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900 dark:bg-sky-700 dark:hover:bg-sky-600">

@@ -18,8 +18,8 @@ const ToggleTheme = () => {
 
   return (
   <button onClick={changeTheme}>      
-     <span className=" text-gray-100 text-sm font-medium dark:hidden"><HiMoon /> </span>
-     <span className=" text-gray-100 text-sm font-medium hidden dark:block dark:text-gray-100 "><HiSun/></span>
+     <span className=" text-gray-700 text-sm font-medium dark:hidden"><HiMoon /> </span>
+     <span className=" text-gray-700 text-sm font-medium hidden dark:block dark:text-gray-100 "><HiSun/></span>
   </button>
   );
 };

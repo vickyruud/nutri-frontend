@@ -22,11 +22,14 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [modalType, setModalType] = useState('')
+  const [error, setError] = useState(false);
 
 
   const themeContextValue = {
     dark,
-    setDark
+    setDark,
+    error,
+    setError
   }
 
   //changes theme 
@@ -68,9 +71,10 @@ function App() {
       localStorage.setItem("token", res.data.jwt)
       localStorage.setItem("user", JSON.stringify(res.data.user))
       setShowModal(false);
+      setError(false);
     })
       .catch(err => {
-        console.log(err);
+        setError(err.response.data.errors);
     })
   }
 
@@ -85,7 +89,7 @@ function App() {
       setShowModal(false);
     })
       .catch(err => {
-        console.log(err);
+        setError(err.response.data.errors);
     })
   }
 
@@ -108,7 +112,7 @@ function App() {
           }
         })
         .then((res) => {
-          setUser(res.data);
+          setUser(res.data);          
         })
         .catch((error) => console.log(error))
       } else {
@@ -121,8 +125,8 @@ function App() {
     
     <ThemeContext.Provider value={themeContextValue}>
       <NavBar register={register} setShowModal={setShowModal} user={user} logout={logout} setModalType={setModalType} />
-      <div className='flex flex-col items-center backdrop-blur-sm'>
         <Modal register={register} modalType={modalType} showModal={showModal} setShowModal={setShowModal} login={login} />
+      <div className='flex flex-col items-center backdrop-blur-sm'>
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/recipes' element={<RecipeList recipes={recipes} />} />

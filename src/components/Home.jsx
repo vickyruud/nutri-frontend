@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom'
 function Home() {
   return (
         <>
-      <section className="showcase">
+      <section className="home-page flex ">
         <div className="overlay flex flex-col items-center justify-center text-white px-5">
           <h1 className="text-5xl font-bold text-right mb-10 lg:text-center lg:text-7xl lg:px-56">
             Find <span className="text-green-500 ">Nutrition Information</span> for your recipes
