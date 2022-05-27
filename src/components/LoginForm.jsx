@@ -23,6 +23,7 @@ function LoginForm({ setShowModal, login }) {
   const closeModal = (event) => {
     event.preventDefault();
     setShowModal(false);
+    setError(false)
   }
 
   return (

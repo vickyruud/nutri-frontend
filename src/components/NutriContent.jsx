@@ -1,9 +1,10 @@
+/* eslint no-eval: 0 */
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DonutChart from "./DonutChart";
 
 function NutriContent({ ingredients }) {
-  const [nutritionContent, setNutritionContent] = useState([]);
   const [graphData, setGraphData] = useState([]);
   const rows = eval(ingredients);
 
@@ -12,20 +13,20 @@ function NutriContent({ ingredients }) {
   });
 
   const nutriInfo = (ingredients) => {
+    console.log(process.env.REACT_APP_API_KEY)
     if (ingredients !== null) {
       axios
         .get(
           `https://api.calorieninjas.com/v1/nutrition?query=` + ingredients,
           {
             headers: {
-              "X-Api-Key": "9WOTZN7Aj1fEaoBGXHJNJg==s7Jxix4whr2caGLx",
+              "X-Api-Key": process.env.REACT_APP_API_KEY,
             },
             contentType: "application/json",
           }
         )
         .then((resp) => {
           console.log(resp.data)
-          setNutritionContent(resp.data.items);
           generateGraphData(resp.data.items);
         });
     }
@@ -56,7 +57,8 @@ function NutriContent({ ingredients }) {
 
   useEffect(() => {
     nutriInfo(formatIngredients);
-  }, []);
+  // eslint-disable-next-line
+  }, [ingredients]);
 
   return (
     <div>

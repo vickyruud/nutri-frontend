@@ -25,6 +25,7 @@ function SignUp({ setShowModal, register  }) {
   const closeModal = (event) => {
     event.preventDefault();
     setShowModal(false);
+    setError(false);
   }
 
   return (
