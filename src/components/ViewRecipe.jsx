@@ -1,44 +1,46 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import IngredientsTable from "./IngredientsTable";
+import NutriContent from "./NutriContent";
+import RecipeSteps from "./RecipeSteps";
 
 function ViewRecipe() {
-  
   const { id } = useParams();
 
-  const recipes = JSON.parse(localStorage.getItem('recipes'));
+  const recipes = JSON.parse(localStorage.getItem("recipes"));
 
-  const chosenRecipe = recipes.filter((recipe) => recipe.id === parseInt(id))[0];
-
-  console.log(chosenRecipe);
+  const chosenRecipe = recipes.filter(
+    (recipe) => recipe.id === parseInt(id)
+  )[0];
 
 
   return (
-    <div className="grid grid-cols-3 gap-8">
-      <div className="flex flex-row flex-wrap w-fit h-96 bg-white rounded-lg border shadow-lg shadow-gray-500 dark:shadow-gray-600  hover:bg-gray-100 dark:border-gray-500 dark:bg-teal-900 dark:hover:bg-teal-800">
-        <img
-          className="object-cover h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          src={chosenRecipe.image_url}
-          alt=""
-        />
-        <div className="flex flex-col items-center">
-        <p className="p-4 ml-4">Name: {chosenRecipe.name}</p>
-        <p className="p-4 ml-4">Servings: {chosenRecipe.servings}</p>
-        <p className="p-4 ml-4">Cooking Time: {chosenRecipe.cooking_time}</p>
-        </div>
-
-        <div className="flex flex-col cursor-pointer justify-between p-4 leading-normal">
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-300">
+    <div className="flex flex-col gap-5 ml-5 mr-5 dark:bg-cyan-900 w-full">
+    <div className="grid grid-cols-3 gap-8 pt-4 dark:bg-cyan-900">
+      <div className="w-xl max-h-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 overflow-y-scroll">
+          <img
+            className="rounded-t-lg object-cover h-48 w-96  "
+            src={chosenRecipe.image_url}
+            alt=""
+            />
+        <div className="p-5">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {chosenRecipe.name}
+            </h5>
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">
             {chosenRecipe.description}
-          </p>
+          </p>          
         </div>
-       
       </div>
       <IngredientsTable ingredients={chosenRecipe.ingredients} />
-      <div>
-        Graph
+      <NutriContent ingredients={chosenRecipe.ingredients}/>
       </div>
-    </div>
+      <div className="w-4/6 max-h-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 overflow-y-scroll pl-7 pr-5">
+        <h1 className="font-bold underline text-2xl mb-5">Steps</h1>
+        <RecipeSteps steps={chosenRecipe.steps}/>
+      </div>
+      
+  </div>
   );
 }
 

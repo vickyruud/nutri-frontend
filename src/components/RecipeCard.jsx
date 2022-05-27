@@ -6,7 +6,7 @@ function RecipeCard({ recipe }) {
   return (
       <div className="flex flex-col items-center  bg-gray-200 rounded-lg border shadow-lg shadow-gray-500 dark:shadow-gray-600 xl:flex-row  hover:bg-gray-100 dark:border-gray-500 dark:bg-teal-900 dark:hover:bg-teal-800">
         <img
-          className="object-cover h-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+          className="object-cover h-48 w-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
           src={recipe.image_url}
           alt=""
         />
