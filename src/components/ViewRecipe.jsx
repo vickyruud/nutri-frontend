@@ -15,16 +15,16 @@ function ViewRecipe() {
 
 
   return (
-    <div className="flex flex-col gap-5 ml-5 mr-5 dark:bg-cyan-900 w-full">
+    <div className="flex flex-col gap-5 p-5 ml-5 mr-5 dark:bg-cyan-900 w-full">
     <div className="grid grid-cols-3 gap-8 pt-4 dark:bg-cyan-900">
-      <div className="w-xl max-h-96 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 overflow-y-scroll">
+      <div className="w-xl max-h-96  bg-white rounded-lg border border-gray-200 shadow-xl dark:bg-gray-800 dark:border-gray-700 overflow-y-auto">
           <img
             className="rounded-t-lg object-cover h-48 w-96  "
             src={chosenRecipe.image_url}
             alt=""
             />
         <div className="p-5">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900  dark:text-white">
               {chosenRecipe.name}
             </h5>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 text-left">

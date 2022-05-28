@@ -21,7 +21,7 @@ function IngredientsTable({ ingredients }) {
   });
 
   return (
-    <div className="relative overflow-x-auto h-96 shadow-md sm:rounded-lg overflow-scroll">
+    <div className="relative overflow-x-auto h-96 shadow-xl sm:rounded-lg overflow-scroll">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
         <thead className="text-xs text-gray-700 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
