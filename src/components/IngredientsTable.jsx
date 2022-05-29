@@ -21,17 +21,17 @@ function IngredientsTable({ ingredients }) {
   });
 
   return (
-    <div className="relative overflow-x-auto h-96 shadow-xl sm:rounded-lg overflow-scroll">
+    <div className="relative overflow-x-auto h-96 shadow-xl sm:rounded-lg overflow-scroll bg-white dark:bg-gray-800">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-        <thead className="text-xs text-gray-700 capitalize bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <thead className="text-xs text-gray-400 capitalize bg-gray-50 dark:bg-gray-900 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 dark:text-gray-100">
               Ingredient
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 dark:text-gray-100">
               Quantity
             </th>
-            <th scope="col" className="px-6 py-3">
+            <th scope="col" className="px-6 py-3 dark:text-gray-100">
               Unit
             </th>
           </tr>

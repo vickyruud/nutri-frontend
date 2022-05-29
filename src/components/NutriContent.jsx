@@ -13,7 +13,6 @@ function NutriContent({ ingredients }) {
   });
 
   const nutriInfo = (ingredients) => {
-    console.log(process.env.REACT_APP_API_KEY)
     if (ingredients !== null) {
       axios
         .get(
@@ -26,7 +25,6 @@ function NutriContent({ ingredients }) {
           }
         )
         .then((resp) => {
-          console.log(resp.data)
           generateGraphData(resp.data.items);
         });
     }
