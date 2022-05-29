@@ -3,16 +3,20 @@ import { useParams } from "react-router-dom";
 import IngredientsTable from "./IngredientsTable";
 import NutriContent from "./NutriContent";
 import RecipeSteps from "./RecipeSteps";
-import Comment from "./Comment";
 import TypeWriterEffect from "react-typewriter-effect";
 import { ThemeContext } from "../App";
+import CommentList from "./CommentList";
 
 function ViewRecipe() {
   const { id } = useParams();
 
-  const {dark} = useContext(ThemeContext)
+  const {dark, user} = useContext(ThemeContext)
 
   const recipes = JSON.parse(localStorage.getItem("recipes"));
+  const comments = JSON.parse(localStorage.getItem("comments"));
+  
+  const chosenComments = comments.filter(comment => comment.recipe_id === parseInt(id))
+  
 
   const chosenRecipe = recipes.filter(
     (recipe) => recipe.id === parseInt(id)
@@ -55,9 +59,9 @@ function ViewRecipe() {
         <IngredientsTable ingredients={chosenRecipe.ingredients} />
         <NutriContent ingredients={chosenRecipe.ingredients} />
       </div>
-      <div className="flex flex-row gap-24 pt-4 dark:bg-cyan-900">
+      <div className="flex flex-row gap-24 justify-evenly">
         <RecipeSteps steps={chosenRecipe.steps} />
-        <Comment />
+       <CommentList comments={chosenComments} user={user} />
       </div>
     </div>
   );

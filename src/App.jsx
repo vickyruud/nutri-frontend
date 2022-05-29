@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import MyRecipes from './components/MyRecipes';
 import Home from './components/Home';
 import ViewRecipe from './components/ViewRecipe';
+import { fetchComments } from './helpers/comments';
 
 
 
@@ -23,13 +24,15 @@ function App() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
   const [modalType, setModalType] = useState('')
   const [error, setError] = useState(false);
+  const [comments, setComments] = useState([]);
 
 
   const themeContextValue = {
     dark,
     setDark,
     error,
-    setError
+    setError,
+    user,
   }
 
   //changes theme 
@@ -50,6 +53,13 @@ function App() {
 
   //fetches all recipes
   useEffect(() => {
+    fetchComments()
+      .then(res => {
+      setComments(res);
+      localStorage.setItem('comments', JSON.stringify(res.comments));
+    })
+
+
     axios.get('/recipes', {
       headers: {
         "Content-type": "application/json"

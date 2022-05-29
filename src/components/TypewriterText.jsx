@@ -14,7 +14,7 @@ function TypewriterText() {
           'Sugars',
           'Fiber',
         ]}
-        multiTextLoop={"true"}
+        multiTextLoop={true}
         multiTextDelay={1000}
         typeSpeed={100}
       />
