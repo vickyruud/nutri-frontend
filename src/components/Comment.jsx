@@ -11,7 +11,13 @@ function Comment({ user }) {
         />
         <p>username</p>
       </div>
-      <p>Comment goes here!</p>
+      <div>
+        <p className="pl-16 flex flex-col">Comment goes here!</p>
+        <div className="flex flex-row justify-between p-5">
+          <button>Edit</button>
+          <button>Delete</button>
+        </div>
+      </div>
     </div>
   );
 }
