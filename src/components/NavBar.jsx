@@ -15,6 +15,11 @@ function NavBar({ setShowModal, user, logout, setModalType }) {
     setShowModal(true);
   }
 
+   const showNewRecipe = () => {
+    setModalType('new-recipe');
+    setShowModal(true);
+  }
+
   
 
   return (
@@ -37,7 +42,7 @@ function NavBar({ setShowModal, user, logout, setModalType }) {
         }
       >                
         {user ? <NavItem content="My Recipes" onClick={() => window.location.href='/my-recipes'} /> : <NavItem content="Sign Up" onClick={showSignUp} />}
-        {user && <NavItem content="Add a Recipe" onClick={() => window.location.href='/recipes/new'} />}
+        {user && <NavItem content="Add a Recipe" onClick={showNewRecipe} />}
         {user ? <NavItem content="Logout" onClick={logout} /> : <NavItem content="Login" onClick={showLogin} />}
         <ToggleTheme />
       </ul>

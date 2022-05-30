@@ -18,6 +18,5 @@ body{
 }
 home-page .overlay {
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0);
-  
+  background-color: rgba(0, 0, 0, 0);  
 }

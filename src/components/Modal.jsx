@@ -1,6 +1,7 @@
 import React from "react";
 import LoginForm from "./LoginForm";
 import NewComment from "./NewComment";
+import NewRecipe from "./NewRecipe";
 import SignUp from "./SignUp";
 
 export default function Modal({showModal, setShowModal, login, modalType, register}) {
@@ -12,6 +13,8 @@ export default function Modal({showModal, setShowModal, login, modalType, regist
             {modalType === 'login' && <LoginForm setShowModal={setShowModal} login={login} />}
             {modalType === 'sign-up' && <SignUp setShowModal={setShowModal} register={register} />}
             {modalType === 'new-comment' && <NewComment setShowModal={setShowModal} />}
+            {modalType === 'new-recipe' && <NewRecipe setShowModal={setShowModal} />}
+
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
