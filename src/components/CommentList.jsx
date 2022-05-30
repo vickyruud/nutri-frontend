@@ -14,7 +14,7 @@ function CommentList({ comments }) {
 
 
   return (
-    <div className='flex flex-col bg-white w-full h-full  pl-5 pr-5 rounded-lg border border-gray-200 shadow-xl dark:bg-gray-800 dark:border-gray-700 mb-5'>{arrayOfComments}</div>
+    <div className='flex flex-col bg-white w-3/6 h-full  pl-5 pr-5 rounded-lg border border-gray-200 shadow-xl dark:bg-gray-800 dark:border-gray-700 mb-5'>{arrayOfComments}</div>
   )
 }
 

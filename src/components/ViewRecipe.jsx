@@ -59,7 +59,7 @@ function ViewRecipe() {
         <IngredientsTable ingredients={chosenRecipe.ingredients} />
         <NutriContent ingredients={chosenRecipe.ingredients} />
       </div>
-      <div className="grid grid-cols-2 grid-flow-row  gap-48 w-full">
+      <div className="flex justify-between gap-16 w-full">
         <RecipeSteps steps={chosenRecipe.steps} />
        <CommentList comments={chosenComments} user={user} />
       </div>

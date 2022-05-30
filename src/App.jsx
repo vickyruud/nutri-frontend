@@ -141,7 +141,7 @@ function App() {
         setShowModal={setShowModal}
         login={login}
       />
-      <div className="flex flex-col items-center backdrop-blur-sm">
+      <div className="flex flex-col items-center backdrop-blur-sm dark:bg-cyan-900">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recipes" element={<RecipeList recipes={recipes} />} />
