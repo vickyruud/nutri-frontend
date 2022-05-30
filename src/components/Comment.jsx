@@ -16,6 +16,7 @@ function Comment({ comment }) {
 
 
   return (
+          
     <div className="flex flex-col bg-white w-full   pl-5 pr-5 pb-5 mb-5 border border-gray-800 dark:bg-gray-800 dark:border-gray-300 mt-5">
       <div className="flex flex-row gap-4 items-center pt-5 w-full">
        <AvatarImage/>
@@ -38,7 +39,7 @@ function Comment({ comment }) {
           </button>
         </div>
       </div>
-    </div>
+    </div>            
   );
 }
 

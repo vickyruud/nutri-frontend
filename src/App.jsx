@@ -21,6 +21,8 @@ function App() {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || null
   );
+
+  // eslint-disable-next-line
   const [allUsers, setAllUsers] = useState([]);
   const [modalType, setModalType] = useState("");
   const [error, setError] = useState(false);
@@ -71,6 +73,11 @@ function App() {
         console.log(error);
       });
   }, []);
+
+  //updates on every new comment
+  useEffect(() => {
+    const comments = JSON.parse(localStorage.getItem('comments'))
+  }, [comments])
 
   //allows the user to login
   const login = (data) => {
@@ -146,8 +153,11 @@ function App() {
 
   const handleNewComment = (comment) => {
     saveComment(comment).then((res) => {
-      setComments(res.data);
+      setComments(res);
       localStorage.setItem("comments", JSON.stringify(res));
+    })
+    .catch(error => {
+        console.log(error);
     });
   };
 
@@ -158,6 +168,10 @@ function App() {
     setError,
     user,
     handleDeleteComment,
+    handleNewComment,
+    setShowModal,
+    showModal,
+    setModalType
   };
 
   return (
@@ -178,8 +192,14 @@ function App() {
       />
       <div className="flex flex-col items-center backdrop-blur-sm dark:bg-cyan-900">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/recipes" element={<RecipeList recipes={recipes} />} />
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/recipes"
+            element={<RecipeList recipes={recipes} />}
+          />
           <Route
             path="/recipes/:id"
             element={<ViewRecipe recipes={recipes} />}

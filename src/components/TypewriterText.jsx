@@ -11,7 +11,7 @@ function TypewriterText() {
           'Carbs',
           'Fats',
           'Protein',
-          'Sugars',
+          'Sugar',
           'Fiber',
         ]}
         multiTextLoop={true}

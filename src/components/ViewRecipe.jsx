@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import IngredientsTable from "./IngredientsTable";
 import NutriContent from "./NutriContent";
@@ -6,6 +6,7 @@ import RecipeSteps from "./RecipeSteps";
 import TypeWriterEffect from "react-typewriter-effect";
 import { ThemeContext } from "../App";
 import CommentList from "./CommentList";
+import NewComment from "./NewComment";
 
 function ViewRecipe() {
   const { id } = useParams();
@@ -22,6 +23,12 @@ function ViewRecipe() {
   const chosenRecipe = recipes.filter(
     (recipe) => recipe.id === parseInt(id)
   )[0];
+  
+  //stores recipes and comments in local storage
+  useEffect(() => {
+    localStorage.setItem('chosenRecipe', JSON.stringify(chosenRecipe))
+    localStorage.setItem('chosenComments', JSON.stringify(chosenComments))
+  }, [])
 
   const legendColor = dark === "dark" ? "white" : "black";
 
@@ -61,7 +68,7 @@ function ViewRecipe() {
       </div>
       <div className="flex justify-between gap-16 w-full">
         <RecipeSteps steps={chosenRecipe.steps} />
-        <CommentList comments={chosenComments} user={user} />
+        <CommentList comments={chosenComments} user={user} recipe={chosenRecipe} />
       </div>
     </div>
   );
