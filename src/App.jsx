@@ -52,7 +52,7 @@ function App() {
   useEffect(() => {
     fetchComments().then((res) => {
       setComments(res);
-      localStorage.setItem("comments", JSON.stringify(res.comments));
+      localStorage.setItem("comments", JSON.stringify(res));
     });
 
     fetchRecipes().then((res) => {
@@ -62,6 +62,7 @@ function App() {
 
     fetchUsers()
       .then((res) => {
+        console.log(res);
         setAllUsers(res);
       localStorage.setItem("users", JSON.stringify(res));
     })
