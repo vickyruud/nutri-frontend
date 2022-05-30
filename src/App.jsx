@@ -1,31 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios'
-import './app.css'
-import NavBar from './components/NavBar';
-import RecipeList from './components/RecipeList';
-import Modal from './components/Modal';
-import { Route, Routes } from 'react-router-dom';
-import MyRecipes from './components/MyRecipes';
-import Home from './components/Home';
-import ViewRecipe from './components/ViewRecipe';
-import { fetchComments } from './helpers/comments';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "./app.css";
+import NavBar from "./components/NavBar";
+import RecipeList from "./components/RecipeList";
+import Modal from "./components/Modal";
+import { Route, Routes } from "react-router-dom";
+import MyRecipes from "./components/MyRecipes";
+import Home from "./components/Home";
+import ViewRecipe from "./components/ViewRecipe";
+import { fetchComments, fetchRecipes, fetchUsers } from "./helpers/getData";
 
-
-
-export const ThemeContext = React.createContext()
-
-
+export const ThemeContext = React.createContext();
 
 function App() {
-  
   const [recipes, setRecipes] = useState([]);
-  const [dark, setDark] = useState(localStorage.getItem('theme') || 'light');
+  const [dark, setDark] = useState(localStorage.getItem("theme") || "light");
   const [showModal, setShowModal] = useState(false);
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
-  const [modalType, setModalType] = useState('')
+  const [user, setUser] = useState(
+    JSON.parse(localStorage.getItem("user")) || null
+  );
+  const [allUsers, setAllUsers] = useState([]);
+  const [modalType, setModalType] = useState("");
   const [error, setError] = useState(false);
   const [comments, setComments] = useState([]);
-
 
   const themeContextValue = {
     dark,
@@ -33,120 +30,132 @@ function App() {
     error,
     setError,
     user,
-  }
+  };
 
-  //changes theme 
+  //changes theme
   useEffect(() => {
-    localStorage.setItem('theme', dark)
-    if (dark === 'light') {
-      document.documentElement.classList.remove('dark')
+    localStorage.setItem("theme", dark);
+    if (dark === "light") {
+      document.documentElement.classList.remove("dark");
     } else {
-      document.documentElement.classList.add(dark)
+      document.documentElement.classList.add(dark);
     }
-  }, [dark])
+  }, [dark]);
 
   //maintains theme on refresh
   useEffect(() => {
-    const theme = localStorage.getItem('theme')
-    if (theme != null) setDark(theme)
+    const theme = localStorage.getItem("theme");
+    if (theme != null) setDark(theme);
   }, []);
 
-  //fetches all recipes
+  //fetches all recipes, comments and users
   useEffect(() => {
-    fetchComments()
-      .then(res => {
+    fetchComments().then((res) => {
       setComments(res);
-      localStorage.setItem('comments', JSON.stringify(res.comments));
-    })
+      localStorage.setItem("comments", JSON.stringify(res.comments));
+    });
 
+    fetchRecipes().then((res) => {
+      setRecipes(res);
+      localStorage.setItem("recipes", JSON.stringify(res));
+    });
 
-    axios.get('/recipes', {
-      headers: {
-        "Content-type": "application/json"
-      }
-    })
+    fetchUsers()
       .then((res) => {
-        setRecipes(res.data);
-        localStorage.setItem('recipes', JSON.stringify(res.data));
+        setAllUsers(res);
+      localStorage.setItem("users", JSON.stringify(res));
     })
-  }, [])
+  }, []);
 
   //allows the user to login
   const login = (data) => {
-
-    axios.post('/login', 
-      data
-    ).then((res) => {
-      setUser(res.data.user)
-      localStorage.setItem("token", res.data.jwt)
-      localStorage.setItem("user", JSON.stringify(res.data.user))
-      setShowModal(false);
-      setError(false);
-    })
-      .catch(err => {
+    axios
+      .post("/login", data)
+      .then((res) => {
+        setUser(res.data.user);
+        localStorage.setItem("token", res.data.jwt);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setShowModal(false);
+        setError(false);
+      })
+      .catch((err) => {
         setError(err.response.data.errors);
-    })
-  }
+      });
+  };
 
   //allows a new user to register
   const register = (data) => {
-    axios.post('/users', 
-      data
-    ).then((res) => {
-      setUser(res.data.user)
-      localStorage.setItem("token", res.data.jwt)
-      localStorage.setItem("user", JSON.stringify(res.data.user))
-      setShowModal(false);
-    })
-      .catch(err => {
+    axios
+      .post("/users", data)
+      .then((res) => {
+        setUser(res.data.user);
+        localStorage.setItem("token", res.data.jwt);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        setShowModal(false);
+      })
+      .catch((err) => {
         setError(err.response.data.errors);
-    })
-  }
-
-
+      });
+  };
 
   const logout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setUser('')
-  }
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    setUser("");
+  };
 
   useEffect(() => {
     if (!user) {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       if (token !== null) {
-      axios.get('/authorize',
-      {
-          headers: {
-            "Authorization": `Bearer ${token}`            
-          }
-        })
-        .then((res) => {
-          setUser(res.data);          
-        })
-        .catch((error) => console.log(error))
+        axios
+          .get("/authorize", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            setUser(res.data);
+          })
+          .catch((error) => console.log(error));
       } else {
-        setUser('');
+        setUser("");
       }
     }
-  },[user])
+  }, [user]);
 
   return (
-    
     <ThemeContext.Provider value={themeContextValue}>
-      <NavBar register={register} setShowModal={setShowModal} user={user} logout={logout} setModalType={setModalType} />
-        <Modal register={register} modalType={modalType} showModal={showModal} setShowModal={setShowModal} login={login} />
-      <div className='flex flex-col items-center backdrop-blur-sm'>
+      <NavBar
+        register={register}
+        setShowModal={setShowModal}
+        user={user}
+        logout={logout}
+        setModalType={setModalType}
+      />
+      <Modal
+        register={register}
+        modalType={modalType}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        login={login}
+      />
+      <div className="flex flex-col items-center backdrop-blur-sm">
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/recipes' element={<RecipeList recipes={recipes} />} />
-          <Route path='/recipes/:id' element={<ViewRecipe recipes={recipes}/>}/>  
-          <Route path='/my-recipes' element={<MyRecipes recipes={recipes} user={user} />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<RecipeList recipes={recipes} />} />
+          <Route
+            path="/recipes/:id"
+            element={<ViewRecipe recipes={recipes} />}
+          />
+          <Route
+            path="/my-recipes"
+            element={<MyRecipes recipes={recipes} user={user} />}
+          />
         </Routes>
       </div>
-      </ThemeContext.Provider>
-      
-  )
+    </ThemeContext.Provider>
+  );
 }
 
-export default App
+export default App;

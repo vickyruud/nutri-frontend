@@ -5,13 +5,13 @@ function RecipeSteps({ steps }) {
   listSteps.pop();
 
   const arrayList = listSteps.map((item, i) => {
-    return <li key={i}>{item}.</li>;
+    return <li className="w-full" key={i}>{item}.</li>;
   });
 
   return (
-    <div className="flex flex-col bg-white rounded-lg border border-gray-200 w-3/6 shadow-xl  max-h-96 dark:bg-gray-800 dark:border-gray-700 overflow-y-auto pl-7 pr-5">
+    <div className="flex flex-col bg-white rounded-lg border border-gray-200 w-full shadow-xl  max-h-96 dark:bg-gray-800 dark:border-gray-700 overflow-y-auto pl-7 pr-5">
       <h1 className="font-bold text-2xl mt-5">How do I make it?</h1>
-      <ul className="list-decimal p-4">{arrayList}</ul>
+      <ul className="list-decimal p-4 w-full">{arrayList}</ul>
     </div>
   );
 }
