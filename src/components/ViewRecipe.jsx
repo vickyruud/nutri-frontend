@@ -6,7 +6,6 @@ import RecipeSteps from "./RecipeSteps";
 import TypeWriterEffect from "react-typewriter-effect";
 import { ThemeContext } from "../App";
 import CommentList from "./CommentList";
-import NewComment from "./NewComment";
 
 function ViewRecipe() {
   const { id } = useParams();
@@ -28,7 +27,7 @@ function ViewRecipe() {
   useEffect(() => {
     localStorage.setItem('chosenRecipe', JSON.stringify(chosenRecipe))
     localStorage.setItem('chosenComments', JSON.stringify(chosenComments))
-  }, [])
+  }, [chosenComments, chosenRecipe])
 
   const legendColor = dark === "dark" ? "white" : "black";
 

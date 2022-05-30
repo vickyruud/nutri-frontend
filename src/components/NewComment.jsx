@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
 import { ThemeContext } from '../App';
 
 function NewComment({ setShowModal }) {
@@ -33,7 +32,7 @@ function NewComment({ setShowModal }) {
 
   return (
     <>
-      <form className="w-3/6 bg-white p-5" onSubmit={handleSubmit}>
+      <form className="w-2/6 bg-white p-5 shadow-lg shadow-gray-700 dark:shadow-xl dark:shadow-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white" onSubmit={handleSubmit}>
         <label
           htmlFor="comment"
           className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"

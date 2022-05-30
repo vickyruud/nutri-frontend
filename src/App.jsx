@@ -74,11 +74,6 @@ function App() {
       });
   }, []);
 
-  //updates on every new comment
-  useEffect(() => {
-    const comments = JSON.parse(localStorage.getItem('comments'))
-  }, [comments])
-
   //allows the user to login
   const login = (data) => {
     axios
@@ -202,7 +197,7 @@ function App() {
           />
           <Route
             path="/recipes/:id"
-            element={<ViewRecipe recipes={recipes} />}
+            element={<ViewRecipe recipes={recipes} comments={comments} />}
           />
           <Route
             path="/my-recipes"

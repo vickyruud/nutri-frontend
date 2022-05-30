@@ -9,6 +9,8 @@ function Comment({ comment }) {
   const username = allUsers.map((user) => {
     if (user.id === comment.user_id) {
       return user.username;
+    } else {
+      return null
     }
   });
 
