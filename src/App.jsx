@@ -9,6 +9,8 @@ import MyRecipes from "./components/MyRecipes";
 import Home from "./components/Home";
 import ViewRecipe from "./components/ViewRecipe";
 import { fetchComments, fetchRecipes, fetchUsers } from "./helpers/getData";
+import { deleteComment } from "./helpers/deleteData";
+
 
 export const ThemeContext = React.createContext();
 
@@ -24,12 +26,27 @@ function App() {
   const [error, setError] = useState(false);
   const [comments, setComments] = useState([]);
 
+  const handleDeleteComment = (id) => {
+    deleteComment(id)
+      .then(res => {
+        setComments(res.data);
+        console.log(res);
+        localStorage.setItem("comments", JSON.stringify(res));
+        console.log('deleted comment', id )
+
+      })
+      .catch(error => {
+      console.log(error)
+    })
+  }
+
   const themeContextValue = {
     dark,
     setDark,
     error,
     setError,
     user,
+    handleDeleteComment
   };
 
   //changes theme
@@ -53,18 +70,26 @@ function App() {
     fetchComments().then((res) => {
       setComments(res);
       localStorage.setItem("comments", JSON.stringify(res));
-    });
+    })
+      .catch(error => {
+      console.log(error)
+    })
 
     fetchRecipes().then((res) => {
       setRecipes(res);
       localStorage.setItem("recipes", JSON.stringify(res));
-    });
+    })
+      .catch(error => {
+      console.log(error)
+    })
 
     fetchUsers()
       .then((res) => {
-        console.log(res);
         setAllUsers(res);
       localStorage.setItem("users", JSON.stringify(res));
+      })
+      .catch(error => {
+      console.log(error)
     })
   }, []);
 
@@ -124,6 +149,11 @@ function App() {
       }
     }
   }, [user]);
+
+  //handle comment delete
+
+
+
 
   return (
     <ThemeContext.Provider value={themeContextValue}>
