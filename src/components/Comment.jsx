@@ -24,13 +24,13 @@ function Comment({ comment }) {
        <AvatarImage/>
         <p className="capitalize">{username}</p>
       </div>
-      <div className="grid grid-cols-1 gap-16">
-        <p className=" p-5 h-fit w-fit">{comment.value}</p>
+      <div className="grid grid-cols-1 gap-4">
+        <p className=" pt-5 pl-5 h-fit w-fit">{comment.value}</p>
         <p className=" flex flex-col pl-5 pt-2 border-t-4 justify-end">
           <TimeAgo date={comment.created_at} />
         </p>
           <button
-            className="mt-2 bg-red-500 p-2 px-4 rounded-full font-semibold text-white transition-all hover:bg-green-800 w-fit"
+            className="mt-2 bg-red-500 p-2 rounded-full font-semibold text-white transition-all hover:bg-green-800 w-fit"
             onClick={() => handleDeleteComment(comment.id)}
           >
             Delete
