@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import TimeAgo from "timeago-react";
-import Avatar from "avataaars";
-import { generateRandomAvatarOptions } from "../helpers/avatars";
 import { ThemeContext } from "../App";
+import AvatarImage from "./AvatarImage";
 
 function Comment({ comment }) {
   const allUsers = JSON.parse(localStorage.getItem("users"));
@@ -19,11 +18,7 @@ function Comment({ comment }) {
   return (
     <div className="flex flex-col bg-white w-full   pl-5 pr-5 pb-5 mb-5 border border-gray-800 dark:bg-gray-800 dark:border-gray-300 mt-5">
       <div className="flex flex-row gap-4 items-center pt-5 w-full">
-        <Avatar
-          style={{ padding: 3, width: "75px", height: "75px" }}
-          avatarStyle="Circle"
-          {...generateRandomAvatarOptions()}
-        />
+       <AvatarImage/>
         <p className="capitalize">{username}</p>
       </div>
       <div className="grid grid-cols-1 gap-16">
