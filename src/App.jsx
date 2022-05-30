@@ -11,6 +11,7 @@ import ViewRecipe from "./components/ViewRecipe";
 import { fetchComments, fetchRecipes, fetchUsers } from "./helpers/getData";
 import { deleteComment } from "./helpers/deleteData";
 import { saveComment } from "./helpers/saveData";
+import NewRecipe from "./components/NewRecipe";
 
 export const ThemeContext = React.createContext();
 
@@ -194,6 +195,10 @@ function App() {
           <Route
             path="/recipes"
             element={<RecipeList recipes={recipes} />}
+          />
+          <Route
+            path="/recipes/new"
+            element={<NewRecipe />}
           />
           <Route
             path="/recipes/:id"

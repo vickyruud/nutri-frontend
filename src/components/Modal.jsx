@@ -12,7 +12,6 @@ export default function Modal({showModal, setShowModal, login, modalType, regist
             {modalType === 'login' && <LoginForm setShowModal={setShowModal} login={login} />}
             {modalType === 'sign-up' && <SignUp setShowModal={setShowModal} register={register} />}
             {modalType === 'new-comment' && <NewComment setShowModal={setShowModal} />}
-
           </div>
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>

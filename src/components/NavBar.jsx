@@ -35,10 +35,10 @@ function NavBar({ setShowModal, user, logout, setModalType }) {
           (showNav ? "left-0" : "-left-full") +
           " md:static fixed  bottom-0 top-12 md:flex md:space-x-7 items-center md:bg-transparent md:text-gray-500 bg-gray-900 bg-opacity-90 md:w-auto w-10/12 text-gray-300 md:space-y-0 space-y-5 p-2 transition-left"
         }
-      >
-                
+      >                
         {user ? <NavItem content="My Recipes" onClick={() => window.location.href='/my-recipes'} /> : <NavItem content="Sign Up" onClick={showSignUp} />}
-        {user ? <NavItem content="Logout" onClick={logout} /> :  <NavItem content="Login" onClick={showLogin} />}
+        {user && <NavItem content="Add a Recipe" onClick={() => window.location.href='/recipes/new'} />}
+        {user ? <NavItem content="Logout" onClick={logout} /> : <NavItem content="Login" onClick={showLogin} />}
         <ToggleTheme />
       </ul>
     </nav>

@@ -10,7 +10,7 @@ function RecipeSteps({ steps }) {
 
   return (
     <div className="flex flex-col bg-white rounded-lg border border-gray-200 w-full shadow-xl  max-h-96 dark:bg-gray-800 dark:border-gray-700 overflow-y-auto pl-7 pr-5">
-      <h1 className="font-bold text-2xl mt-5 border-b-2 border-gray-800">How do I make it?</h1>
+      <h1 className="font-bold text-2xl mt-5 border-b-2 border-gray-800 dark:border-gray-200">How do I make it?</h1>
       <ul className="list-decimal p-4 w-full ">{arrayList}</ul>
     </div>
   );
