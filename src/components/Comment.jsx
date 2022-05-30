@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import TimeAgo from "timeago-react";
+import TimeAgo from 'react-timeago'
 import { ThemeContext } from "../App";
 import AvatarImage from "./AvatarImage";
 
@@ -27,7 +27,7 @@ function Comment({ comment }) {
       <div className="grid grid-cols-1 gap-16">
         <p className=" p-5 h-fit w-fit">{comment.value}</p>
         <p className=" flex flex-col pl-5 pt-2 border-t-4 justify-end">
-          <TimeAgo datetime={comment.created_at} />
+          <TimeAgo date={comment.created_at} />
         </p>
           <button
             className="mt-2 bg-red-500 p-2 px-4 rounded-full font-semibold text-white transition-all hover:bg-green-800 w-fit"
