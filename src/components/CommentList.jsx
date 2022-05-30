@@ -2,9 +2,20 @@ import React, { useContext } from 'react'
 import { ThemeContext } from '../App';
 import Comment from './Comment'
 
-function CommentList({ comments }) {
+function CommentList({ comments, recipe }) {
 
-  const {setModalType, setShowModal, user} = useContext(ThemeContext)
+  const { setModalType, setShowModal, user } = useContext(ThemeContext)
+
+  const allUsers = JSON.parse(localStorage.getItem("users"));
+
+  
+  const recipeAuthor = allUsers.filter(user => {
+    if (user.id === recipe.user_id) {
+      return user;
+    } else {
+      return null
+    }
+  })
 
 
     const showNewComment = () => {
@@ -13,7 +24,7 @@ function CommentList({ comments }) {
   }
   
   const arrayOfComments = comments.map(comment => {
-    return(<Comment key={comment.id} comment={comment} />)
+    return(<Comment recipeAuthor={recipeAuthor} key={comment.id} comment={comment} />)
   })
   
 

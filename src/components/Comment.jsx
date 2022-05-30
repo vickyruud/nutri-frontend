@@ -3,9 +3,12 @@ import TimeAgo from 'react-timeago'
 import { ThemeContext } from "../App";
 import AvatarImage from "./AvatarImage";
 
-function Comment({ comment }) {
+function Comment({ comment, recipeAuthor }) {
+
+  console.log(recipeAuthor)
   const allUsers = JSON.parse(localStorage.getItem("users"));
 
+  const { handleDeleteComment, user } = useContext(ThemeContext)
   const username = allUsers.map((user) => {
     if (user.id === comment.user_id) {
       return user.username;
@@ -14,8 +17,9 @@ function Comment({ comment }) {
     }
   });
 
-  const { handleDeleteComment } = useContext(ThemeContext)
+  
 
+ 
 
   return (
           
@@ -28,13 +32,17 @@ function Comment({ comment }) {
         <p className=" pt-5 pl-5 h-fit w-fit">{comment.value}</p>
         <p className=" flex flex-col pl-5 pt-2 border-t-4 justify-end">
           <TimeAgo date={comment.created_at} />
-        </p>
-          <button
+        </p> 
+        {
+          recipeAuthor[0].id === user.id ?   <button
             className="mt-2 bg-red-500 p-2 rounded-full font-semibold text-white transition-all hover:bg-green-800 w-fit"
             onClick={() => handleDeleteComment(comment.id)}
           >
             Delete
-          </button>
+          </button> : null
+        }
+        
+                  
       </div>
     </div>            
   );
