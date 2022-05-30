@@ -10,7 +10,7 @@ import Home from "./components/Home";
 import ViewRecipe from "./components/ViewRecipe";
 import { fetchComments, fetchRecipes, fetchUsers } from "./helpers/getData";
 import { deleteComment } from "./helpers/deleteData";
-
+import { saveComment } from "./helpers/saveData";
 
 export const ThemeContext = React.createContext();
 
@@ -25,29 +25,6 @@ function App() {
   const [modalType, setModalType] = useState("");
   const [error, setError] = useState(false);
   const [comments, setComments] = useState([]);
-
-  const handleDeleteComment = (id) => {
-    deleteComment(id)
-      .then(res => {
-        setComments(res.data);
-        console.log(res);
-        localStorage.setItem("comments", JSON.stringify(res));
-        console.log('deleted comment', id )
-
-      })
-      .catch(error => {
-      console.log(error)
-    })
-  }
-
-  const themeContextValue = {
-    dark,
-    setDark,
-    error,
-    setError,
-    user,
-    handleDeleteComment
-  };
 
   //changes theme
   useEffect(() => {
@@ -67,30 +44,32 @@ function App() {
 
   //fetches all recipes, comments and users
   useEffect(() => {
-    fetchComments().then((res) => {
-      setComments(res);
-      localStorage.setItem("comments", JSON.stringify(res));
-    })
-      .catch(error => {
-      console.log(error)
-    })
+    fetchComments()
+      .then((res) => {
+        setComments(res);
+        localStorage.setItem("comments", JSON.stringify(res));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
-    fetchRecipes().then((res) => {
-      setRecipes(res);
-      localStorage.setItem("recipes", JSON.stringify(res));
-    })
-      .catch(error => {
-      console.log(error)
-    })
+    fetchRecipes()
+      .then((res) => {
+        setRecipes(res);
+        localStorage.setItem("recipes", JSON.stringify(res));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     fetchUsers()
       .then((res) => {
         setAllUsers(res);
-      localStorage.setItem("users", JSON.stringify(res));
+        localStorage.setItem("users", JSON.stringify(res));
       })
-      .catch(error => {
-      console.log(error)
-    })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
   //allows the user to login
@@ -151,9 +130,35 @@ function App() {
   }, [user]);
 
   //handle comment delete
+  const handleDeleteComment = (id) => {
+    deleteComment(id)
+      .then((res) => {
+        setComments(res.data);
+        localStorage.setItem("comments", JSON.stringify(res));
+        console.log("deleted comment", id);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
+  //Add new comment
 
+  const handleNewComment = (comment) => {
+    saveComment(comment).then((res) => {
+      setComments(res.data);
+      localStorage.setItem("comments", JSON.stringify(res));
+    });
+  };
 
+  const themeContextValue = {
+    dark,
+    setDark,
+    error,
+    setError,
+    user,
+    handleDeleteComment,
+  };
 
   return (
     <ThemeContext.Provider value={themeContextValue}>

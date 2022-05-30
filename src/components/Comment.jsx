@@ -27,11 +27,11 @@ function Comment({ comment }) {
           <TimeAgo datetime={comment.created_at} />
         </p>
         <div className="flex flex-row justify-between p-5  bottom-0 border border-gray-800">
-          <button className="mt-2 bg-blue-500 p-2 px-4 rounded-full font-semibold transition-all hover:bg-green-800">
+          <button className="mt-2 bg-blue-500 p-2 px-4 rounded-full text-white font-semibold transition-all hover:bg-green-800">
             Edit
           </button>
           <button
-            className="mt-2 bg-red-500 p-2 px-4 rounded-full font-semibold transition-all hover:bg-green-800"
+            className="mt-2 bg-red-500 p-2 px-4 rounded-full font-semibold text-white transition-all hover:bg-green-800"
             onClick={() => handleDeleteComment(comment.id)}
           >
             Delete
