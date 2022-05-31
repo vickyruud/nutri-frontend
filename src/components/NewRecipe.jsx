@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ThemeContext } from "../App";
 import { saveRecipe } from "../helpers/saveData";
 import NewIngredient from "./NewIngredient";
+import NewIngredientList from "./NewIngredientList";
 
 function NewRecipe({ setShowModal }) {
   const [name, setName] = useState("");
@@ -34,8 +35,11 @@ function NewRecipe({ setShowModal }) {
     createNewRecipe(newRecipeObj);
   }
 
+ 
+
+
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-200 dark:bg-teal-700 ">
+    <div className="flex flex-col items-center justify-center bg-gray-200 dark:bg-teal-700 overflow-auto">
       <h3 className="text-2xl pt-5 font-bold text-center">
         Create a new recipe
       </h3>
@@ -93,7 +97,7 @@ function NewRecipe({ setShowModal }) {
         </div>
 
         <div className="grid xl:grid-cols-2 xl:gap-6">
-          <div className="relative z-0 w-full mb-6 group">
+          <div className="relative z-0 w-full mt-5 mb-5 group">
             <input
               type="number"
               min="0"
@@ -111,7 +115,7 @@ function NewRecipe({ setShowModal }) {
               Servings
             </label>
           </div>
-          <div className="relative z-0 w-full mb-6 group">
+          <div className="relative z-0 w-full mt-5 mb-5 group">
             <input
               type="number"
               min="0"
@@ -130,7 +134,7 @@ function NewRecipe({ setShowModal }) {
             </label>
           </div>
         </div>
-        <NewIngredient
+        <NewIngredientList
           ingredients={ingredients}
           setIngredients={setIngredients}
         />
