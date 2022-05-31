@@ -10,7 +10,7 @@ import Home from "./components/Home";
 import ViewRecipe from "./components/ViewRecipe";
 import { fetchComments, fetchRecipes, fetchUsers } from "./helpers/getData";
 import { deleteComment } from "./helpers/deleteData";
-import { saveComment } from "./helpers/saveData";
+import { saveComment, saveRecipe } from "./helpers/saveData";
 import NewRecipe from "./components/NewRecipe";
 
 export const ThemeContext = React.createContext();
@@ -148,12 +148,22 @@ function App() {
   //Add new comment
 
   const handleNewComment = (comment) => {
-    saveComment(comment).then((res) => {
-      setComments(res);
-      localStorage.setItem("comments", JSON.stringify(res));
-    })
-    .catch(error => {
+    saveComment(comment)
+      .then((res) => {
+        setComments(res);
+        localStorage.setItem("comments", JSON.stringify(res));
+      })
+      .catch((error) => {
         console.log(error);
+      });
+  };
+
+  //creates new recipe
+  const createNewRecipe = (recipe) => {
+    saveRecipe(recipe).then((res) => {
+      setRecipes(res);
+      localStorage.setItem("Recipes", JSON.stringify(res));
+      setShowModal(false)
     });
   };
 
@@ -167,7 +177,8 @@ function App() {
     handleNewComment,
     setShowModal,
     showModal,
-    setModalType
+    setModalType,
+    createNewRecipe
   };
 
   return (
@@ -188,18 +199,9 @@ function App() {
       />
       <div className="flex flex-col items-center backdrop-blur-sm dark:bg-cyan-900">
         <Routes>
-          <Route
-            path="/"
-            element={<Home />}
-          />
-          <Route
-            path="/recipes"
-            element={<RecipeList recipes={recipes} />}
-          />
-          <Route
-            path="/recipes/new"
-            element={<NewRecipe />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<RecipeList recipes={recipes} />} />
+          <Route path="/recipes/new" element={<NewRecipe />} />
           <Route
             path="/recipes/:id"
             element={<ViewRecipe recipes={recipes} comments={comments} />}

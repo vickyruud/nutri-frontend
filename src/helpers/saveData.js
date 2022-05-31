@@ -5,3 +5,10 @@ export const saveComment = (comment) => {
     return res.data;
   });
 };
+
+export const saveRecipe = (recipe) => {
+  return axios.post(`/recipes`, recipe).then((res) => {
+    return res.data;
+  });
+};
+

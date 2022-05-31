@@ -2,7 +2,7 @@ import React from "react";
 
 function RecipeSteps({ steps }) {
   const listSteps = steps.split(".");
-  listSteps.pop();
+  if (listSteps.length > 1) listSteps.pop();
 
   const arrayList = listSteps.map((item, i) => {
     return <li className="w-full" key={i}>{item}.</li>;

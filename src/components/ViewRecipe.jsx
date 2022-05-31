@@ -25,6 +25,9 @@ function ViewRecipe() {
   
   //stores recipes and comments in local storage
   useEffect(() => {
+    window.scrollTo({
+      top: 0
+    })
     localStorage.setItem('chosenRecipe', JSON.stringify(chosenRecipe))
     localStorage.setItem('chosenComments', JSON.stringify(chosenComments))
   }, [chosenComments, chosenRecipe])
@@ -36,7 +39,7 @@ function ViewRecipe() {
       <div className="grid grid-cols-3 gap-8 pt-4 dark:bg-cyan-900">
         <div className="w-xl max-h-96  bg-white rounded-lg border border-gray-200 shadow-xl dark:bg-gray-800 dark:border-gray-700 overflow-y-hidden">
           <img
-            className="rounded-t-lg object-cover h-48 w-96  "
+            className="rounded-t-lg object-contain h-48 w-48 pt-2  "
             src={chosenRecipe.image_url}
             alt=""
           />

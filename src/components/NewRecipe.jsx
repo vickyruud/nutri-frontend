@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { ThemeContext } from "../App";
+import { saveRecipe } from "../helpers/saveData";
 import NewIngredient from "./NewIngredient";
 
 function NewRecipe({ setShowModal }) {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [steps, setSteps] = useState("");
+  const [servings, setServings] = useState("");
+  const [cookingTime, setCookingTime] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+
+  const { createNewRecipe, user } = useContext(ThemeContext);
+
   const closeModal = (event) => {
     event.preventDefault();
     setShowModal(false);
   };
 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newRecipeObj = {
+      user_id:user.id,
+      name,
+      description,
+      steps,
+      servings,
+      cooking_time: cookingTime,
+      ingredients: JSON.stringify(ingredients)
+    };
+    console.log(newRecipeObj);
+    createNewRecipe(newRecipeObj);
+  }
+
   return (
     <div className="flex flex-col items-center justify-center bg-gray-200 dark:bg-teal-700 ">
-        <h3 className="text-2xl pt-5 font-bold text-center">Create a new recipe</h3>
-      <form className="p-5 border-2 border-gray-800 m-5">
-      <div className="relative z-0 w-full mb-6 group pt-4">
+      <h3 className="text-2xl pt-5 font-bold text-center">
+        Create a new recipe
+      </h3>
+      <form className="p-5 border-2 border-gray-800 m-5" onSubmit={handleSubmit}>
+        <div className="relative z-0 w-full mb-6 group pt-4">
           <input
             type="text"
             name="name"
@@ -19,6 +48,7 @@ function NewRecipe({ setShowModal }) {
             className="block py-2.5 h-16  px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer overflow-y-auto"
             placeholder=" "
             required=""
+            onChange={(event) => setName(event.target.value)}
           />
           <label
             htmlFor="name"
@@ -35,6 +65,7 @@ function NewRecipe({ setShowModal }) {
             className="block py-2.5 h-16  px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer overflow-y-auto"
             placeholder=" "
             required=""
+            onChange={(event) => setDescription(event.target.value)}
           />
           <label
             htmlFor="description"
@@ -43,7 +74,7 @@ function NewRecipe({ setShowModal }) {
             Description
           </label>
         </div>
-          <div className="relative z-0 w-full mb-6 group pt-4">
+        <div className="relative z-0 w-full group pt-4">
           <textarea
             type="text"
             name="steps"
@@ -51,6 +82,7 @@ function NewRecipe({ setShowModal }) {
             className="block py-2.5 h-32 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required=""
+            onChange={(event) => setSteps(event.target.value)}
           />
           <label
             htmlFor="steps"
@@ -59,7 +91,7 @@ function NewRecipe({ setShowModal }) {
             Steps
           </label>
         </div>
-     
+
         <div className="grid xl:grid-cols-2 xl:gap-6">
           <div className="relative z-0 w-full mb-6 group">
             <input
@@ -70,6 +102,7 @@ function NewRecipe({ setShowModal }) {
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required=""
+              onChange={(event) => setServings(event.target.value)}
             />
             <label
               htmlFor="servings"
@@ -87,6 +120,7 @@ function NewRecipe({ setShowModal }) {
               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               placeholder=" "
               required=""
+              onChange={(event) => setCookingTime(event.target.value)}
             />
             <label
               htmlFor="cooking_time"
@@ -96,24 +130,27 @@ function NewRecipe({ setShowModal }) {
             </label>
           </div>
         </div>
-        <NewIngredient/>
+        <NewIngredient
+          ingredients={ingredients}
+          setIngredients={setIngredients}
+        />
         <div className="flex flex-row justify-between">
-        <button
-          type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Submit
-        </button>
-        <button
-          type="submit"
-          onClick={closeModal}
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        >
-          Cancel
-        </button>
-          </div>
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit
+          </button>
+          <button
+            type="submit"
+            onClick={closeModal}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
-      </div>
+    </div>
   );
 }
 
