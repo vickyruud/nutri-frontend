@@ -12,10 +12,6 @@ function NewIngredientList({ ingredients, setIngredients }) {
     );
   });
 
-   const addIngredient = () => {
-    
-  }
-
   return <div>{arrayOfNewIngredients}</div>;
 }
 

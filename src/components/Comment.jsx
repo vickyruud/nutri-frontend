@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import TimeAgo from 'react-timeago'
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 import AvatarImage from "./AvatarImage";
 
 function Comment({ comment, recipeAuthor }) {
@@ -8,7 +8,7 @@ function Comment({ comment, recipeAuthor }) {
   console.log(recipeAuthor)
   const allUsers = JSON.parse(localStorage.getItem("users"));
 
-  const { handleDeleteComment, user } = useContext(ThemeContext)
+  const { handleDeleteComment, user } = useContext(AppContext)
   const username = allUsers.map((user) => {
     if (user.id === comment.user_id) {
       return user.username;

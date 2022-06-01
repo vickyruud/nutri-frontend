@@ -4,13 +4,13 @@ import IngredientsTable from "./IngredientsTable";
 import NutriContent from "./NutriContent";
 import RecipeSteps from "./RecipeSteps";
 import TypeWriterEffect from "react-typewriter-effect";
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 import CommentList from "./CommentList";
 
 function ViewRecipe() {
   const { id } = useParams();
 
-  const { dark, user } = useContext(ThemeContext);
+  const { dark, user } = useContext(AppContext);
 
   const recipes = JSON.parse(localStorage.getItem("recipes"));
   const comments = JSON.parse(localStorage.getItem("comments"));

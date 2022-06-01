@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewIngredient({setIngredients, ingredients}) {
+function NewIngredient({setIngredients, ingredients, addIngredient}) {
 
   const [name, setName] = useState('');
   const [unit, setUnit] = useState('');
@@ -14,6 +14,11 @@ function NewIngredient({setIngredients, ingredients}) {
       quantity
     }
     setIngredients([...ingredients, newIngredientObj])
+  }
+
+  const addMore = (event) => {
+    event.preventDefault();
+    addIngredient();
   }
 
   return (
@@ -41,6 +46,7 @@ function NewIngredient({setIngredients, ingredients}) {
 
       /> 
       <button
+        type="button"
         className="flex-shrink-0  bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 m-2 rounded"
         onClick={onSave}
       >
@@ -48,6 +54,7 @@ function NewIngredient({setIngredients, ingredients}) {
       </button>
       <button
         className="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 m-2 rounded"
+        onClick={addMore}
       >
         +
       </button>

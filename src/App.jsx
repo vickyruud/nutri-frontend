@@ -13,7 +13,7 @@ import { deleteComment } from "./helpers/deleteData";
 import { saveComment, saveRecipe } from "./helpers/saveData";
 import NewRecipe from "./components/NewRecipe";
 
-export const ThemeContext = React.createContext();
+export const AppContext = React.createContext();
 
 function App() {
   const [recipes, setRecipes] = useState([]);
@@ -106,12 +106,14 @@ function App() {
       });
   };
 
+  //handles logout
   const logout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setUser("");
   };
 
+  //maintains user login on refresh
   useEffect(() => {
     if (!user) {
       const token = localStorage.getItem("token");
@@ -146,7 +148,6 @@ function App() {
   };
 
   //Add new comment
-
   const handleNewComment = (comment) => {
     saveComment(comment)
       .then((res) => {
@@ -167,7 +168,8 @@ function App() {
     });
   };
 
-  const themeContextValue = {
+  //use context to pass values to components
+  const appContextValue = {
     dark,
     setDark,
     error,
@@ -182,7 +184,7 @@ function App() {
   };
 
   return (
-    <ThemeContext.Provider value={themeContextValue}>
+    <AppContext.Provider value={appContextValue}>
       <NavBar
         register={register}
         setShowModal={setShowModal}
@@ -212,7 +214,7 @@ function App() {
           />
         </Routes>
       </div>
-    </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 }
 

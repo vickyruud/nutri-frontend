@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 import { saveRecipe } from "../helpers/saveData";
 import NewIngredient from "./NewIngredient";
 import NewIngredientList from "./NewIngredientList";
@@ -12,7 +12,7 @@ function NewRecipe({ setShowModal }) {
   const [cookingTime, setCookingTime] = useState("");
   const [ingredients, setIngredients] = useState([]);
 
-  const { createNewRecipe, user } = useContext(ThemeContext);
+  const { createNewRecipe, user } = useContext(AppContext);
 
   const closeModal = (event) => {
     event.preventDefault();
@@ -31,7 +31,6 @@ function NewRecipe({ setShowModal }) {
       cooking_time: cookingTime,
       ingredients: JSON.stringify(ingredients)
     };
-    console.log(newRecipeObj);
     createNewRecipe(newRecipeObj);
   }
 

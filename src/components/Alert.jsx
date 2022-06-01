@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 
 function Alert() {
-  const { error, setError } = useContext(ThemeContext);
+  const { error, setError } = useContext(AppContext);
   return (
   <div role="alert">
   <div class=" flex flex-row bg-red-700 text-white font-bold justify-between rounded-t px-4 py-2 mt-2">

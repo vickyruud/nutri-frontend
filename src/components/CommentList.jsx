@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
-import { ThemeContext } from '../App';
+import { AppContext } from '../App';
 import Comment from './Comment'
 
 function CommentList({ comments, recipe }) {
 
-  const { setModalType, setShowModal, user } = useContext(ThemeContext)
+  const { setModalType, setShowModal, user } = useContext(AppContext)
 
   const allUsers = JSON.parse(localStorage.getItem("users"));
 

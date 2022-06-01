@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
-import { ThemeContext } from '../App';
+import { AppContext } from '../App';
 
 function NewComment({ setShowModal }) {
-  const { handleNewComment, user } = useContext(ThemeContext);
+  const { handleNewComment, user } = useContext(AppContext);
 
   const [newComment, setNewComment] = useState('')
 

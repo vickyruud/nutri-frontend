@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function DonutChart(props) {
-  const { dark } = useContext(ThemeContext);
+  const { dark } = useContext(AppContext);
 
   const data = {
     labels: ["Carbohydrate", "Protein", "Sugar", "Fat", "Fiber"],

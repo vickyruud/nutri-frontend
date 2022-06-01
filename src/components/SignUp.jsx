@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { ThemeContext } from "../App";
+import { AppContext } from "../App";
 import Alert from "./Alert";
 
 function SignUp({ setShowModal, register  }) {
@@ -7,7 +7,7 @@ function SignUp({ setShowModal, register  }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { error, setError } = useContext(ThemeContext);
+  const { error, setError } = useContext(AppContext);
 
 
   const onSubmit = (event) => {
