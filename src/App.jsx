@@ -168,7 +168,7 @@ function App() {
     });
   };
 
-  //use context to pass values to components
+  //use context to pass variables to components
   const appContextValue = {
     dark,
     setDark,
