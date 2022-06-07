@@ -19,6 +19,7 @@
     "react-scripts": "5.0.1",
     "react-timeago": "^6.2.1",
     "react-typewriter-effect": "^1.1.0",
+    "react-youtube": "^9.0.2",
     "timeago-react": "^3.0.5",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
@@ -63,6 +64,7 @@
     "autoprefixer": "^10.4.7",
     "babel-plugin-named-exports-order": "^0.0.2",
     "postcss": "^8.4.14",
+    "postcss-nesting": "^10.1.8",
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.0.24",
     "webpack": "^5.72.1"
