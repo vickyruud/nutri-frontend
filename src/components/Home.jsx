@@ -9,7 +9,7 @@ function Home() {
         <div className="overlay flex flex-col items-center justify-center text-white px-5">
           <video loop autoPlay>
             <source
-              src={'./'}
+              src=""
               type="video/mp4"
             />
             Your browser does not support the video tag.
