@@ -7,6 +7,13 @@ function Home() {
     <>
       <section className="home-page flex w-full items-center justify-center ">
         <div className="overlay flex flex-col items-center justify-center text-white px-5">
+          <video loop autoPlay>
+            <source
+              src={'./'}
+              type="video/mp4"
+            />
+            Your browser does not support the video tag.
+          </video>
           <h1 className="text-5xl font-bold text-right mb-10 lg:text-center lg:text-7xl lg:px-56">
             What's in your <span className="text-yellow-300 ">meals</span>
           </h1>
