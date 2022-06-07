@@ -1,24 +1,20 @@
 import React from "react";
-import { Link } from 'react-router-dom';
-
+import { Link } from "react-router-dom";
 
 function RecipeCard({ recipe }) {
+  console.log(recipe);
   return (
-      <div className="flex flex-col items-center  bg-gray-200 rounded-lg border shadow-lg shadow-gray-500 dark:shadow-gray-600 xl:flex-row  hover:bg-gray-100 dark:border-gray-500 dark:bg-teal-900 dark:hover:bg-teal-800">
-        <img
-          className="object-cover h-48 w-96 rounded-t-lg md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
-          src={recipe.image_url}
-          alt=""
-        />
-        <div className="flex flex-col cursor-pointer justify-between p-4 leading-normal">
-          <Link to={`/recipes/${recipe.id}`} className="mb-2 underline text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
-            {recipe.name}
-          </Link>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-300">
-            {recipe.description}
-          </p>
+    <div className="flex flex-col items-center  bg-gray-200 rounded-lg border shadow-lg shadow-gray-500 dark:shadow-gray-600 xl:flex-row  hover:bg-gray-100 dark:border-gray-500 dark:bg-teal-900 dark:hover:bg-teal-800">
+      <div class="w-64 h-64 bg-red-100 relative">
+        <div
+          class="absolute inset-0 bg-cover bg-center z-0"
+          style={{backgroundImage : `url(${recipe.image_url})`}}
+        ></div>
+        <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-end items-center text-2xl text-gray-800 font-semibold bg-red-500  dark:text-white  dark:bg-gray-800 dark:border-gray-700 ">
+          {recipe.name}
         </div>
       </div>
+    </div>
   );
 }
 
