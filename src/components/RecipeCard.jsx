@@ -11,7 +11,9 @@ function RecipeCard({ recipe }) {
           style={{backgroundImage : `url(${recipe.image_url})`}}
         ></div>
         <div class="opacity-0 hover:opacity-100 duration-300 absolute inset-0 z-10 flex justify-end items-center text-2xl text-gray-800 font-semibold bg-red-500  dark:text-white  dark:bg-gray-800 dark:border-gray-700 ">
-          {recipe.name}
+          { <Link to={`/recipes/${recipe.id}`} className="mb-2 underline text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+            {recipe.name}
+          </Link>}
         </div>
       </div>
     </div>
