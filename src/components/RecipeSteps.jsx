@@ -1,6 +1,7 @@
 import React from "react";
 
 function RecipeSteps({ steps }) {
+  //generates bullet points from steps
   const listSteps = steps.split(".");
   if (listSteps.length > 1) listSteps.pop();
 
